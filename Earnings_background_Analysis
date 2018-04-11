@@ -1,0 +1,72 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+recent_grads = pd.read_csv('recent-grads.csv')
+recent_grads.describe()
+
+print(recent_grads.iloc[1])
+#recent_grads.head(1)
+#recent_grads.tail(1)
+
+raw_data_count = recent_grads.shape[0]
+
+recent_grads = recent_grads.dropna()
+cleaned_data_count = recent_grads.shape[0]
+
+print('Before cleaning: ', raw_data_count)
+print('After cleaning: ', cleaned_data_count)
+
+recent_grads.plot(x='Sample_size', y='Employed', 
+                  kind='scatter', 
+                  title='Employed vs. Sample_size', 
+                  figsize=(5,10))
+                 
+recent_grads.plot(x='Sample_size', y='Median', 
+                  kind='scatter', 
+                  title='Median vs. Sample_size', 
+                  figsize=(5,10))
+                  
+recent_grads.plot(x='Sample_size', y='Unemployment_rate', 
+                  kind='scatter', 
+                  title='Median vs. Sample_size', 
+                  figsize=(5,10))
+                  
+recent_grads.plot(x='Full_time', y='Median', 
+                  kind='scatter', 
+                  title='Full time vs. Median', 
+                  figsize=(5,10))
+                  
+recent_grads.plot(x='ShareWomen', y='Unemployment_rate', 
+                  kind='scatter', 
+                  title='Sharewomen vs. Unemployment Rate', 
+                  figsize=(5,10))
+                  
+recent_grads.plot(x='Men', y='Median', 
+                  kind='scatter', 
+                  title='Men vs. Median', 
+                  figsize=(5,10))
+                  
+recent_grads.plot(x='Women', y='Median', 
+                  kind='scatter', 
+                  title='Women vs. Median', 
+                  figsize=(5,10))
+                  
+recent_grads.plot(x='Full_time', y='Median', 
+                  kind='scatter', 
+                  title='Full time employees vs. Median Salary', 
+                  figsize=(5,10))
+                  
+recent_grads['Sample_size'].hist(bins=25, range=(0,5000))
+
+recent_grads['Median'].hist(bins=25)
+
+import pandas.tools.plotting as ptp
+ptp.scatter_matrix(recent_grads[['Women', 'Men']], figsize=(10,10))
+
+ptp.scatter_matrix(recent_grads[['Sample_size', 'Median']], figsize=(10,10))
+ptp.scatter_matrix(recent_grads[['Sample_size', 'Median', 'Unemployment_rate']], figsize=(10,10))
+
+recent_grads[:5]['Women'].plot(kind='bar')
+
+recent_grads[:10].plot.bar(x='Major', y='ShareWomen', legend=False)
